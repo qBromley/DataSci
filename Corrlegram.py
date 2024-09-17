@@ -12,7 +12,7 @@ def density_estimation(yMin,yMax,xMin,xMax,m1, m2, bandwidth=0.1):
     Z = np.reshape(kernel(positions).T, X.shape)
     return X, Y, Z
 
-df = pd.read_csv('/home/quinn/DataSci/archive/Top_1000_IMDb_movies_New_version.csv')
+df = pd.read_csv('archive/Top_1000_IMDb_movies_New_version.csv')
 # Clean data by removing commas
 df['Votes'] = df['Votes'].str.replace(',', '').astype(float)
 df['Gross'] = pd.to_numeric(df['Gross'].str.replace(',', ''), errors='coerce')
@@ -27,7 +27,7 @@ numeric_columns = ['Watch Time', 'Movie Rating', 'Metascore of movie', 'Gross', 
 corr_matrix_cleaned = df_cleaned[numeric_columns].corr()
 plt.figure(figsize=(10, 8))
 sns.heatmap(corr_matrix_cleaned, annot=True, cmap='seismic', linewidths=0.5, center = 0)
-plt.savefig('/home/quinn/DataSci/correlogram.png')
+plt.savefig('Corrlegram.png')
 plt.clf()
 #box plot metascore and gross
 #calculating iqr
@@ -44,7 +44,7 @@ sns.regplot(x='Metascore of movie', y='Gross', data=df_cleaned,line_kws={"color"
 plt.xlabel('Metascore')
 plt.ylabel('Gross Revenue')
 plt.title('Scatter Plot of Gross Revenue by Metascore')
-plt.savefig('/home/quinn/DataSci/ScatterMetaGross.png')
+plt.savefig('ScatterMetaGross.png')
 plt.clf()
 
 #Density of Movie rating and Gross income
@@ -52,13 +52,13 @@ xMin, xMax = 7,10
 yMin, yMax = 0,300
 plt.figure(figsize=(10,8))
 X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Movie Rating'],df_cleaned['Gross'],.15)
-cp = plt.contourf(X, Y, Z, levels=15, cmap='viridis')
+cp = plt.contourf(X, Y, Z, levels=15, cmap='seismic')
 plt.colorbar(cp, label='Density')
 plt.title('Density Contour Map of Movie Ratings vs Gross Income')
 plt.xlabel('Movie Rating')
 plt.ylabel('Gross Income (Millions USD)')
 plt.grid(True)
-plt.savefig('/home/quinn/DataSci/DensityRatingGross.png')
+plt.savefig('DensityRatingGross.png')
 plt.clf()
 
 #Density of Metascore and Gross
@@ -66,13 +66,13 @@ xMin, xMax = 70,100
 
 plt.figure(figsize=(10,8))
 X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Metascore of movie'],df_cleaned['Gross'],.21)
-cp = plt.contourf(X, Y, Z, levels=15, cmap='viridis')
+cp = plt.contourf(X, Y, Z, levels=15, cmap='seismic')
 plt.colorbar(cp, label='Density')
 plt.title('Density Contour Map of Movie Ratings vs Gross Income')
 plt.xlabel('Metascore of movie')
 plt.ylabel('Gross Income (Millions USD)')
 plt.grid(True)
-plt.savefig('/home/quinn/DataSci/DensityMetascoreGross.png')
+plt.savefig('DensityMetascoreGross.png')
 plt.clf()
 
 
@@ -82,7 +82,7 @@ sns.regplot(x='Movie Rating', y='Gross', data=df_cleaned,line_kws={"color": "red
 plt.xlabel('Movie Rating')
 plt.ylabel('Gross Revenue')
 plt.title('Scatter Plot of Gross Revenue by Movie Rating')
-plt.savefig('/home/quinn/DataSci/ScatterAudianceGross.png')
+plt.savefig('ScatterAudianceGross.png')
 plt.clf()
 
 
@@ -92,7 +92,7 @@ sns.regplot(x='Metascore of movie', y='Gross', data=df_no_outliers,line_kws={"co
 plt.xlabel('Metascore')
 plt.ylabel('Gross Revenue')
 plt.title('Scatter Plot of Gross Revenue by Metascore')
-plt.savefig('/home/quinn/DataSci/ScatterOutliersRemovedMetaGross.png')
+plt.savefig('ScatterOutliersRemovedMetaGross.png')
 plt.clf()
 
 #box plot showing 
@@ -107,7 +107,7 @@ sns.boxplot(x='Metascore_binned', y='Gross', data=df_cleaned)
 plt.xlabel('Metascore Category')
 plt.ylabel('Gross Revenue')
 plt.title('Box Plot of Gross Revenue by Binned Metascore')
-plt.savefig('/home/quinn/DataSci/BoxPlotMetaGross.png')
+plt.savefig('BoxPlotMetaGross.png')
 plt.clf()
 
 
