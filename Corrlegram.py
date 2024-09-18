@@ -4,6 +4,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
 
+
+
 def density_estimation(yMin,yMax,xMin,xMax,m1, m2, bandwidth=0.1):
     X, Y = np.mgrid[xMin:xMax:100j, yMin:yMax:100j]
     positions = np.vstack([X.ravel(), Y.ravel()])
@@ -97,20 +99,20 @@ plt.title('Scatter Plot of Gross Revenue by Metascore')
 plt.savefig('ScatterOutliersRemovedMetaGross.png')
 plt.clf()
 
-#box plot showing 
-bins = [0, 60, 80, 100]
-labels = ['Low(0-60)', 'Medium(60-80)', 'High(80-100)']
-df_cleaned = df_no_outliers.copy()
-df_cleaned.loc[:, 'Metascore_binned'] = pd.cut(df_cleaned['Metascore of movie'], bins=bins, labels=labels, right=False)
+# #box plot showing 
+# bins = [0, 60, 80, 100]
+# labels = ['Low(0-60)', 'Medium(60-80)', 'High(80-100)']
+# df_cleaned = df_no_outliers.copy()
+# df_cleaned.loc[:, 'Metascore_binned'] = pd.cut(df_cleaned['Metascore of movie'], bins=bins, labels=labels, right=False)
 
-# Create the box plot using the binned Metascore
-plt.figure(figsize=(10, 20))
-sns.boxplot(x='Metascore_binned', y='Gross', data=df_cleaned)
-plt.xlabel('Metascore Category')
-plt.ylabel('Gross Revenue')
-plt.title('Box Plot of Gross Revenue by Binned Metascore')
-plt.savefig('BoxPlotMetaGross.png')
-plt.clf()
+# # Create the box plot using the binned Metascore
+# plt.figure(figsize=(10, 20))
+# sns.boxplot(x='Metascore_binned', y='Gross', data=df_cleaned)
+# plt.xlabel('Metascore Category')
+# plt.ylabel('Gross Revenue')
+# plt.title('Box Plot of Gross Revenue by Binned Metascore')
+# plt.savefig('BoxPlotMetaGross.png')
+# plt.clf()
 
 
 
