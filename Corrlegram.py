@@ -52,7 +52,8 @@ xMin, xMax = 7,10
 yMin, yMax = 0,300
 plt.figure(figsize=(10,8))
 X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Movie Rating'],df_cleaned['Gross'],.15)
-cp = plt.contourf(X, Y, Z, levels=15, cmap='seismic')
+cp = plt.contourf(X, Y, Z, levels=15, cmap='plasma')
+plt.contour(X, Y, Z, levels=15, colors='white', linewidths=1.5)
 plt.colorbar(cp, label='Density')
 plt.title('Density Contour Map of Movie Ratings vs Gross Income')
 plt.xlabel('Movie Rating')
@@ -66,9 +67,10 @@ xMin, xMax = 70,100
 
 plt.figure(figsize=(10,8))
 X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Metascore of movie'],df_cleaned['Gross'],.21)
-cp = plt.contourf(X, Y, Z, levels=15, cmap='seismic')
+cp = plt.contourf(X, Y, Z, levels=15, cmap='plasma')
+plt.contour(X, Y, Z, levels=15, colors='white', linewidths=1.5)
 plt.colorbar(cp, label='Density')
-plt.title('Density Contour Map of Movie Ratings vs Gross Income')
+plt.title('Density Contour Map of Critic ratings vs Gross Income')
 plt.xlabel('Metascore of movie')
 plt.ylabel('Gross Income (Millions USD)')
 plt.grid(True)
