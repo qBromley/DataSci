@@ -20,8 +20,10 @@ df = pd.read_csv('archive/movies_with_adjusted_gross.csv')
 
 # Drop rows with no data
 df_cleaned = df.dropna(subset=['Gross Adjusted for Inflation (2023)', 'Metascore of movie'])
+#calculating IQR by generating q1 and q3 using quantile function
 Q1 = df_cleaned['Gross Adjusted for Inflation (2023)'].quantile(0.25)
 Q3 = df_cleaned['Gross Adjusted for Inflation (2023)'].quantile(0.75)
+#subtracting q1 and q3 to calculate IQR
 IQR = Q3 - Q1
 # bounding based on outlier range
 lower_bound = Q1 - 1.5 * IQR
