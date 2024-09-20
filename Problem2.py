@@ -37,10 +37,10 @@ plt.savefig('adjusted/ScatterMetaGross.png')
 plt.clf()
 
 #Density of Movie rating and Gross Adjusted for Inflation (2023) income
-xMin, xMax = 7,10
-yMin, yMax = 0,600
+xMin, xMax = 7,9
+yMin, yMax = 0,1000
 plt.figure(figsize=(10,8))
-X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Movie Rating'],df_cleaned['Gross Adjusted for Inflation (2023)'],.15)
+X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Movie Rating'],df_cleaned['Gross Adjusted for Inflation (2023)'],.1)
 cp = plt.contourf(X, Y, Z, levels=14, cmap='plasma')
 plt.contour(X, Y, Z, levels=14, colors='white', linewidths=1.5)
 plt.colorbar(cp, label='Density')
@@ -51,13 +51,12 @@ plt.grid(True)
 plt.savefig('adjusted/DensityRatingGross.png')
 plt.clf()
 #Density of Metascore and Gross Adjusted for Inflation (2023)
-xMin, xMax = 70,100
+xMin, xMax = 60,100
 
 plt.figure(figsize=(10,8))
-X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Metascore of movie'],df_cleaned['Gross Adjusted for Inflation (2023)'],.21)
+X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Metascore of movie'],df_cleaned['Gross Adjusted for Inflation (2023)'],.1)
 cp = plt.contourf(X, Y, Z, levels=14, cmap='plasma')
 plt.contour(X, Y, Z, levels=14, colors='white', linewidths=1.5)
-plt.colorbar(cp, label='Density')
 plt.title('Density Contour Map of Critic ratings vs Gross Adjusted for Inflation (2023) Income')
 plt.xlabel('Metascore of movie')
 plt.ylabel('Gross Adjusted for Inflation (2023) Income (Millions USD)')
@@ -83,4 +82,11 @@ plt.xlabel('Metascore')
 plt.ylabel('Gross Adjusted for Inflation (2023) Revenue')
 plt.title('Scatter Plot of Gross Adjusted for Inflation (2023) Revenue by Metascore')
 plt.savefig('adjusted/ScatterOutliersRemovedMetaGross.png')
+plt.clf()
+#Correlegram
+numeric_columns = ['Watch Time', 'Movie Rating', 'Metascore of movie', 'Gross Adjusted for Inflation (2023)', 'Votes']
+corr_matrix_cleaned = df_cleaned[numeric_columns].corr()
+plt.figure(figsize=(15, 8))
+sns.heatmap(corr_matrix_cleaned, annot=True, cmap='seismic', linewidths=0.5,center = 0)
+plt.savefig('adjusted/Corrlegram.png')
 plt.clf()

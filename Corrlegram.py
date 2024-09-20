@@ -49,46 +49,23 @@ plt.title('Scatter Plot of Gross Revenue by Metascore')
 plt.savefig('ScatterMetaGross.png')
 plt.clf()
 
-#Density of Movie rating and Gross income
-xMin, xMax = 7,10
-yMin, yMax = 0,300
-plt.figure(figsize=(10,8))
-X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Movie Rating'],df_cleaned['Gross'],.15)
-cp = plt.contourf(X, Y, Z, levels=15, cmap='plasma')
-plt.contour(X, Y, Z, levels=15, colors='white', linewidths=1.5)
-plt.colorbar(cp, label='Density')
-plt.title('Density Contour Map of Movie Ratings vs Gross Income')
-plt.xlabel('Movie Rating')
-plt.ylabel('Gross Income (Millions USD)')
-plt.grid(True)
-plt.savefig('DensityRatingGross.png')
-plt.clf()
-
-#Density of Metascore and Gross
-xMin, xMax = 70,100
-
-plt.figure(figsize=(10,8))
-X, Y, Z = density_estimation(yMin, yMax,xMin,xMax,df_cleaned['Metascore of movie'],df_cleaned['Gross'],.21)
-cp = plt.contourf(X, Y, Z, levels=15, cmap='plasma')
-plt.contour(X, Y, Z, levels=15, colors='white', linewidths=1.5)
-plt.colorbar(cp, label='Density')
-plt.title('Density Contour Map of Critic ratings vs Gross Income')
-plt.xlabel('Metascore of movie')
-plt.ylabel('Gross Income (Millions USD)')
-plt.grid(True)
-plt.savefig('DensityMetascoreGross.png')
-plt.clf()
-
-
 
 plt.figure(figsize=(15, 8))
-sns.regplot(x='Movie Rating', y='Gross', data=df_cleaned,line_kws={"color": "red"})
-plt.xlabel('Movie Rating')
+sns.regplot(x='Watch Time', y='Gross', data=df_cleaned,line_kws={"color": "red"})
+plt.xlabel('Watch Time')
 plt.ylabel('Gross Revenue')
-plt.title('Scatter Plot of Gross Revenue by Movie Rating')
-plt.savefig('ScatterAudianceGross.png')
+plt.title('Scatter Plot of Gross income by Watch Time')
+plt.savefig('ScatterWatchTimeGross.png')
 plt.clf()
+# Movie Rating
 
+plt.figure(figsize=(15, 8))
+sns.regplot(x='Watch Time', y='Movie Rating', data=df_cleaned,line_kws={"color": "red"})
+plt.xlabel('Watch Time')
+plt.ylabel('Movie Rating')
+plt.title('Scatter Plot of Movie Rating, by Watch Time')
+plt.savefig('ScatterWatchtimeRating.png')
+plt.clf()
 
 
 plt.figure(figsize=(15, 8))
