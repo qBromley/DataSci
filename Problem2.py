@@ -1,3 +1,4 @@
+# this is my kernel density function, it makes a 
 def density_estimation(yMin,yMax,xMin,xMax,m1, m2, bandwidth=0.1):
     X, Y = np.mgrid[xMin:xMax:100j, yMin:yMax:100j]
     positions = np.vstack([X.ravel(), Y.ravel()])

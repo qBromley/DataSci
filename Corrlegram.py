@@ -4,16 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
 
-
-
-def density_estimation(yMin,yMax,xMin,xMax,m1, m2, bandwidth=0.1):
-    X, Y = np.mgrid[xMin:xMax:100j, yMin:yMax:100j]
-    positions = np.vstack([X.ravel(), Y.ravel()])
-    values = np.vstack([m1, m2])
-    kernel = stats.gaussian_kde(values, bw_method=bandwidth)
-    Z = np.reshape(kernel(positions).T, X.shape)
-    return X, Y, Z
-
 df = pd.read_csv('archive/Top_1000_IMDb_movies_New_version.csv')
 # Clean data by removing commas
 df['Votes'] = df['Votes'].str.replace(',', '').astype(float)
@@ -41,6 +31,7 @@ lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 df_no_outliers = df_cleaned[(df_cleaned['Gross'] >= lower_bound) & (df_cleaned['Gross'] <= upper_bound)]
 
+# regplot is a scatterplot with a trendline, this is useing the seaborn package
 plt.figure(figsize=(15, 8))
 sns.regplot(x='Metascore of movie', y='Gross', data=df_cleaned,line_kws={"color": "red"})
 plt.xlabel('Metascore')
@@ -49,7 +40,7 @@ plt.title('Scatter Plot of Gross Revenue by Metascore')
 plt.savefig('ScatterMetaGross.png')
 plt.clf()
 
-
+#scatterplot of watertime and gross income correlation
 plt.figure(figsize=(15, 8))
 sns.regplot(x='Watch Time', y='Gross', data=df_cleaned,line_kws={"color": "red"})
 plt.xlabel('Watch Time')
@@ -57,8 +48,8 @@ plt.ylabel('Gross Revenue')
 plt.title('Scatter Plot of Gross income by Watch Time')
 plt.savefig('ScatterWatchTimeGross.png')
 plt.clf()
-# Movie Rating
 
+#scatterplot of watchtime and audiance rating
 plt.figure(figsize=(15, 8))
 sns.regplot(x='Watch Time', y='Movie Rating', data=df_cleaned,line_kws={"color": "red"})
 plt.xlabel('Watch Time')
@@ -67,7 +58,7 @@ plt.title('Scatter Plot of Movie Rating, by Watch Time')
 plt.savefig('ScatterWatchtimeRating.png')
 plt.clf()
 
-
+#Scatterplot of metascore of movie and gross income with outliers removed usiing IQR
 plt.figure(figsize=(15, 8))
 sns.regplot(x='Metascore of movie', y='Gross', data=df_no_outliers,line_kws={"color": "red"})
 plt.xlabel('Metascore')
