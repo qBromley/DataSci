@@ -40,7 +40,7 @@ plt.title('Scatter Plot of Gross Revenue by Metascore')
 plt.savefig('ScatterMetaGross.png')
 plt.clf()
 
-#scatterplot of watertime and gross income correlation
+#scatterplot of watchtime and gross income correlation
 plt.figure(figsize=(15, 8))
 sns.regplot(x='Watch Time', y='Gross', data=df_cleaned,line_kws={"color": "red"})
 plt.xlabel('Watch Time')
@@ -56,6 +56,27 @@ plt.xlabel('Watch Time')
 plt.ylabel('Movie Rating')
 plt.title('Scatter Plot of Movie Rating, by Watch Time')
 plt.savefig('ScatterWatchtimeRating.png')
+plt.clf()
+plt.figure(figsize=(15, 8))
+
+# figure with two subplots stacked vertically
+fig, ax = plt.subplots(nrows=2, figsize=(15, 16))
+
+# Scatter plot watch time and gross income
+sns.regplot(x='Watch Time', y='Gross', data=df_cleaned, line_kws={"color": "red"}, ax=ax[0])
+ax[0].set_xlabel('Watch Time', fontsize=16)
+ax[0].set_ylabel('Gross Revenue', fontsize=16)
+ax[0].set_title('Scatter Plot of Gross income by Watch Time', fontsize=16)
+
+# Scatter plot watch time movie rating
+sns.regplot(x='Watch Time', y='Movie Rating', data=df_cleaned, line_kws={"color": "red"}, ax=ax[1])
+ax[1].set_xlabel('Watch Time', fontsize=16)
+ax[1].set_ylabel('Movie Rating', fontsize=16)
+ax[1].set_title('Scatter Plot of Movie Rating, by Watch Time', fontsize=16)
+
+# prevent overlap
+plt.tight_layout()
+plt.savefig('StackedScatterWatchTime.png')
 plt.clf()
 
 #Scatterplot of metascore of movie and gross income with outliers removed usiing IQR
