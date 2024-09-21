@@ -41,11 +41,55 @@ plt.clf()
 plt.figure(figsize=(8, 15))
 
 # creating bins for my boxplot
-bins = [ 75, 100, 125,150,175,200,225]
+bins = [ 90, 135,170,230]
 bin_labels = pd.cut(df['Watch Time'], bins=bins)
-sns.boxplot(x=bin_labels, y='Gross', data=df)
+sns.violinplot(x=bin_labels, y='Gross Adjusted for Inflation (2023)', data=df)
+plt.xlabel('Watch Time')
+plt.ylabel('Gross Revenue')
+plt.title('Box Plot of Gross Income by Watch Time Bins')
+plt.savefig('adjusted/ViolinplotGrossIncome.png')
+plt.clf()
+
+bin_labels = pd.cut(df['Watch Time'], bins=bins)
+sns.boxplot(x=bin_labels, y='Gross Adjusted for Inflation (2023)', data=df)
 plt.xlabel('Watch Time')
 plt.ylabel('Gross Revenue')
 plt.title('Box Plot of Gross Income by Watch Time Bins')
 plt.savefig('adjusted/BoxplotGrossIncome.png')
+plt.clf()
+
+# creating bins for my boxplot
+bins = [ 90, 135,170,230]
+bin_labels = pd.cut(df['Watch Time'], bins=bins)
+sns.violinplot(x=bin_labels, y='Movie Rating', data=df)
+plt.xlabel('Watch Time')
+plt.ylabel('Audiance Score')
+plt.title('Box Plot of Audiance Score by Watch Time Bins')
+plt.savefig('adjusted/ViolinplotRating.png')
+plt.clf()
+
+
+bin_labels = pd.cut(df['Watch Time'], bins=bins)
+sns.boxplot(x=bin_labels, y='Movie Rating', data=df)
+plt.xlabel('Watch Time')
+plt.ylabel('Audiance Score')
+plt.title('Box Plot of Audiance Score by Watch Time Bins')
+plt.savefig('adjusted/BoxplotRating.png')
+plt.clf()
+# Grabbing the means of the bins i made for audiance score and gross income 
+avg_gross_per_bin = df.groupby(bin_labels,observed=True)['Gross Adjusted for Inflation (2023)'].mean()
+avg_audiance_score_per_bin = df.groupby(bin_labels,observed=True)['Movie Rating'].mean()
+
+#creating a bar plot for gross income vs watch time
+plt.bar(x=avg_gross_per_bin.index.astype(str), height=avg_gross_per_bin)
+plt.xlabel('Watch Time')
+plt.ylabel('Average Gross Income (Adjusted)')
+plt.title('Bar Plot of Average Gross Income')
+plt.savefig('adjusted/BarplotGross')
+plt.clf()
+plt.bar(x=avg_audiance_score_per_bin.index.astype(str), height=avg_audiance_score_per_bin)
+plt.xlabel('Watch Time')
+plt.ylabel('Average Audiance Score')
+plt.title('Bar Plot of Audiance Score')
+plt.savefig('adjusted/BarplotAudiance')
 plt.clf()
