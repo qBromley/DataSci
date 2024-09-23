@@ -31,34 +31,6 @@ lower_bound = Q1 - 1.5 * IQR
 upper_bound = Q3 + 1.5 * IQR
 df_no_outliers = df_cleaned[(df_cleaned['Gross'] >= lower_bound) & (df_cleaned['Gross'] <= upper_bound)]
 
-# regplot is a scatterplot with a trendline, this is useing the seaborn package
-plt.figure(figsize=(15, 8))
-sns.regplot(x='Metascore of movie', y='Gross', data=df_cleaned,line_kws={"color": "red"})
-plt.xlabel('Metascore')
-plt.ylabel('Gross Revenue')
-plt.title('Scatter Plot of Gross Revenue by Metascore')
-plt.savefig('ScatterMetaGross.png')
-plt.clf()
-
-#scatterplot of watchtime and gross income correlation
-plt.figure(figsize=(15, 8))
-sns.regplot(x='Watch Time', y='Gross', data=df_cleaned,line_kws={"color": "red"})
-plt.xlabel('Watch Time')
-plt.ylabel('Gross Revenue')
-plt.title('Scatter Plot of Gross income by Watch Time')
-plt.savefig('ScatterWatchTimeGross.png')
-plt.clf()
-
-#scatterplot of watchtime and audiance rating
-plt.figure(figsize=(15, 8))
-sns.regplot(x='Watch Time', y='Movie Rating', data=df_cleaned,line_kws={"color": "red"})
-plt.xlabel('Watch Time')
-plt.ylabel('Movie Rating')
-plt.title('Scatter Plot of Movie Rating, by Watch Time')
-plt.savefig('ScatterWatchtimeRating.png')
-plt.clf()
-plt.figure(figsize=(15, 8))
-
 # figure with two subplots stacked vertically
 fig, ax = plt.subplots(nrows=2, figsize=(15, 16))
 
@@ -88,20 +60,6 @@ plt.title('Scatter Plot of Gross Revenue by Metascore')
 plt.savefig('ScatterOutliersRemovedMetaGross.png')
 plt.clf()
 
-# #box plot showing 
-# bins = [0, 60, 80, 100]
-# labels = ['Low(0-60)', 'Medium(60-80)', 'High(80-100)']
-# df_cleaned = df_no_outliers.copy()
-# df_cleaned.loc[:, 'Metascore_binned'] = pd.cut(df_cleaned['Metascore of movie'], bins=bins, labels=labels, right=False)
-
-# # Create the box plot using the binned Metascore
-# plt.figure(figsize=(10, 20))
-# sns.boxplot(x='Metascore_binned', y='Gross', data=df_cleaned)
-# plt.xlabel('Metascore Category')
-# plt.ylabel('Gross Revenue')
-# plt.title('Box Plot of Gross Revenue by Binned Metascore')
-# plt.savefig('BoxPlotMetaGross.png')
-# plt.clf()
 
 
 

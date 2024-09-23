@@ -21,13 +21,15 @@ inflation_df['Cumulative Inflation (to 2023)'] = (1 + inflation_df['Annual'] / 1
 
 conversion_df = inflation_df[['Year', 'Cumulative Inflation (to 2023)']].copy()
 
-# Removing rows with missing years and dropping rows with empty years and making sure all data types are Ints
-df_cleaned['Year of Release'] = df_cleaned['Year of Release'].str.extract('(\d{4})')
+
+df_cleaned['Year of Release'] = df_cleaned['Year of Release'].str.extract('(\d{4})').copy()
+
+
 df_cleaned = df_cleaned.dropna(subset=['Year of Release']) 
 df_cleaned['Year of Release'] = df_cleaned['Year of Release'].astype(int)
 
-#Remove any rows with Year of Release before 1954
-df_cleaned = df_cleaned[df_cleaned['Year of Release'] >= 1954]
+#Remove any rows with Year of Release before 1958
+df_cleaned = df_cleaned[df_cleaned['Year of Release'] >= 1958]
 
 merged_df = pd.merge(df_cleaned, conversion_df, left_on='Year of Release', right_on='Year', how='left')
 
